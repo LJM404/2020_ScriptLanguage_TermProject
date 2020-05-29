@@ -1,4 +1,5 @@
 sidoNames = {
+    '도시' : '%EB%8F%84%EC%8B%9C',
     '서울' : '%EC%84%9C%EC%9A%B8',
     '부산' : '%EB%B6%80%EC%82%B0',
     '대구' : '%EB%8C%80%EA%B5%AC',
@@ -18,7 +19,12 @@ sidoNames = {
     '세종' : '%EC%84%B8%EC%A2%85'
 }
 
+defaultStationNames = {
+    '측정소' : '%EC%B8%A1%EC%A0%95%EC%86%8C'
+}
+
 seoulStationNames = {
+    '측정소'    : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '화랑로'    : '%ED%99%94%EB%9E%91%EB%A1%9C',
     '노원구'    : '%EB%85%B8%EC%9B%90%EA%B5%AC',
     '양천구'    : '%EC%96%91%EC%B2%9C%EA%B5%AC',
@@ -62,6 +68,7 @@ seoulStationNames = {
 }
 
 busanStationNames = {
+    '측정소'   : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '부산신항' : '%EB%B6%80%EC%82%B0%EC%8B%A0%ED%95%AD',
     '부산북항' : '%EB%B6%80%EC%82%B0%EB%B6%81%ED%95%AD',
     '당리동'   : '%EB%8B%B9%EB%A6%AC%EB%8F%99',
@@ -94,6 +101,7 @@ busanStationNames = {
 }
 
 daeguStationNames = {
+    '측정소' : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '다사읍' : '%EB%8B%A4%EC%82%AC%EC%9D%8D',
     '진천동' : '%EC%A7%84%EC%B2%9C%EB%8F%99',
     '시지동' : '%EC%8B%9C%EC%A7%80%EB%8F%99',
@@ -113,6 +121,7 @@ daeguStationNames = {
 }
 
 incheonStationNames = {
+    '측정소' : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '영흥'   : '%EC%98%81%ED%9D%A5',
     '백령도' : '%EB%B0%B1%EB%A0%B9%EB%8F%84',
     '덕적도' : '%EB%8D%95%EC%A0%81%EB%8F%84',
@@ -144,6 +153,7 @@ incheonStationNames = {
 }
 
 gwangjuStationNames = {
+    '측정소'  : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '주월동'  : '%EC%A3%BC%EC%9B%94%EB%8F%99',
     '평동'    : '%ED%8F%89%EB%8F%99',
     '오선동'  : '%EC%98%A4%EC%84%A0%EB%8F%99',
@@ -158,6 +168,7 @@ gwangjuStationNames = {
 }
 
 daejeonStationNames = {
+    '측정소'  : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '월평동'  : '%EC%9B%94%ED%8F%89%EB%8F%99',
     '둔산동'  : '%EB%91%94%EC%82%B0%EB%8F%99',
     '정림동'  : '%EC%A0%95%EB%A6%BC%EB%8F%99',
@@ -173,27 +184,29 @@ daejeonStationNames = {
 }
 
 ulsanStationNames = {
-    '전하동' : B'%EC%A0%84%ED%95%98%EB%8F%99',
-    '웅촌면' : B'%EC%9B%85%EC%B4%8C%EB%A9%B4',
-    '약사동' : B'%EC%95%BD%EC%82%AC%EB%8F%99',
-    '삼남면' : B'%EC%82%BC%EB%82%A8%EB%A9%B4',
-    '농소동' : B'%EB%86%8D%EC%86%8C%EB%8F%99',
-    '상남리' : B'%EC%83%81%EB%82%A8%EB%A6%AC',
-    '화산리' : B'%ED%99%94%EC%82%B0%EB%A6%AC',
-    '효문동' : B'%ED%9A%A8%EB%AC%B8%EB%8F%99',
-    '무거동' : B'%EB%AC%B4%EA%B1%B0%EB%8F%99',
-    '덕신리' : B'%EB%8D%95%EC%8B%A0%EB%A6%AC',
-    '신정동' : B'%EC%8B%A0%EC%A0%95%EB%8F%99',
-    '신정로' : B'%EC%8B%A0%EC%A0%95%EB%A1%9C',
-    '삼산동' : B'%EC%82%BC%EC%82%B0%EB%8F%99',
-    '야음동' : B'%EC%95%BC%EC%9D%8C%EB%8F%99',
-    '여천동' : B'%EC%97%AC%EC%B2%9C%EB%8F%99(%EC%9A%B8%EC%82%B0)',
-    '부곡동' : B'%EB%B6%80%EA%B3%A1%EB%8F%99(%EC%9A%B8%EC%82%B0)',
-    '성남동' : B'%EC%84%B1%EB%82%A8%EB%8F%99',
-    '대송동' : B'%EB%8C%80%EC%86%A1%EB%8F%99'
+    '측정소'  : '%EC%B8%A1%EC%A0%95%EC%86%8C',
+    '전하동'  : '%EC%A0%84%ED%95%98%EB%8F%99',
+    '웅촌면'  : '%EC%9B%85%EC%B4%8C%EB%A9%B4',
+    '약사동'  : '%EC%95%BD%EC%82%AC%EB%8F%99',
+    '삼남면'  : '%EC%82%BC%EB%82%A8%EB%A9%B4',
+    '농소동'  : '%EB%86%8D%EC%86%8C%EB%8F%99',
+    '상남리'  : '%EC%83%81%EB%82%A8%EB%A6%AC',
+    '화산리'  : '%ED%99%94%EC%82%B0%EB%A6%AC',
+    '효문동'  : '%ED%9A%A8%EB%AC%B8%EB%8F%99',
+    '무거동'  : '%EB%AC%B4%EA%B1%B0%EB%8F%99',
+    '덕신리'  : '%EB%8D%95%EC%8B%A0%EB%A6%AC',
+    '신정동'  : '%EC%8B%A0%EC%A0%95%EB%8F%99',
+    '신정로'  : '%EC%8B%A0%EC%A0%95%EB%A1%9C',
+    '삼산동'  : '%EC%82%BC%EC%82%B0%EB%8F%99',
+    '야음동'  : '%EC%95%BC%EC%9D%8C%EB%8F%99',
+    '여천동'  : '%EC%97%AC%EC%B2%9C%EB%8F%99(%EC%9A%B8%EC%82%B0)',
+    '부곡동'  : '%EB%B6%80%EA%B3%A1%EB%8F%99(%EC%9A%B8%EC%82%B0)',
+    '성남동'  : '%EC%84%B1%EB%82%A8%EB%8F%99',
+    '대송동'  : '%EB%8C%80%EC%86%A1%EB%8F%99'
 }
 
 gyeonggiStationNames = {
+    '측정소'     : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '송내대로'   : '%EC%86%A1%EB%82%B4%EB%8C%80%EB%A1%9C(%EC%A4%91%EB%8F%99)',
     '오정동'     : '%EC%98%A4%EC%A0%95%EB%8F%99',
     '중2동'      : '%EC%A4%912%EB%8F%99',
@@ -302,6 +315,7 @@ gyeonggiStationNames = {
 }
 
 gangwonStationNames = {
+    '측정소'  : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '인제군'  : '%EC%9D%B8%EC%A0%9C%EA%B5%B0',
     '태백시'  : '%ED%83%9C%EB%B0%B1%EC%8B%9C',
     '화천군'  : '%ED%99%94%EC%B2%9C%EA%B5%B0',
@@ -330,6 +344,7 @@ gangwonStationNames = {
 }
 
 chungbukStationNames = {
+    '측정소'   : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '옥천읍'   : '%EC%98%A5%EC%B2%9C%EC%9D%8D',
     '보은읍'   : '%EB%B3%B4%EC%9D%80%EC%9D%8D',
     '증평읍'   : '%EC%A6%9D%ED%8F%89%EC%9D%8D',
@@ -359,6 +374,7 @@ chungbukStationNames = {
 }
 
 chungnamStationNames = {
+    '측정소'     : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '장항읍'     : '%EC%9E%A5%ED%95%AD%EC%9D%8D',
     '서면'       : '%EC%84%9C%EB%A9%B4',
     '서천읍'     : '%EC%84%9C%EC%B2%9C%EC%9D%8D',
@@ -396,6 +412,7 @@ chungnamStationNames = {
 }
 
 jeonbukStationNames = {
+    '측정소'   : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '장수읍'   : '%EC%9E%A5%EC%88%98%EC%9D%8D',
     '순창읍'   : '%EC%88%9C%EC%B0%BD%EC%9D%8D',
     '무주읍'   : '%EB%AC%B4%EC%A3%BC%EC%9D%8D',
@@ -431,47 +448,49 @@ jeonbukStationNames = {
 }
 
 jeonnamStationNames = {
-'벌교읍'   : '%EB%B2%8C%EA%B5%90%EC%9D%8D',
-'구례읍'   : '%EA%B5%AC%EB%A1%80%EC%9D%8D',
-'곡성읍'   : '%EA%B3%A1%EC%84%B1%EC%9D%8D',
-'강진읍'   : '%EA%B0%95%EC%A7%84%EC%9D%8D',
-'무안읍'   : '%EB%AC%B4%EC%95%88%EC%9D%8D',
-'신안군'   : '%EC%8B%A0%EC%95%88%EA%B5%B0',
-'고흥읍'   : '%EA%B3%A0%ED%9D%A5%EC%9D%8D',
-'함평읍'   : '%ED%95%A8%ED%8F%89%EC%9D%8D',
-'신지면'   : '%EC%8B%A0%EC%A7%80%EB%A9%B4',
-'진도읍'   : '%EC%A7%84%EB%8F%84%EC%9D%8D',
-'장흥읍'   : '%EC%9E%A5%ED%9D%A5%EC%9D%8D',
-'영광읍'   : '%EC%98%81%EA%B4%91%EC%9D%8D',
-'화순읍'   : '%ED%99%94%EC%88%9C%EC%9D%8D',
-'송단리'   : '%EC%86%A1%EB%8B%A8%EB%A6%AC',
-'나불리'   : '%EB%82%98%EB%B6%88%EB%A6%AC',
-'해남읍'   : '%ED%95%B4%EB%82%A8%EC%9D%8D',
-'광양읍'   : '%EA%B4%91%EC%96%91%EC%9D%8D',
-'진상면'   : '%EC%A7%84%EC%83%81%EB%A9%B4',
-'태인동'   : '%ED%83%9C%EC%9D%B8%EB%8F%99',
-'중동'     : '%EC%A4%91%EB%8F%99',
-'삼일동'   : '%EC%82%BC%EC%9D%BC%EB%8F%99',
-'율촌면'   : '%EC%9C%A8%EC%B4%8C%EB%A9%B4',
-'화양면'   : '%ED%99%94%EC%96%91%EB%A9%B4',
-'장성읍'   : '%EC%9E%A5%EC%84%B1%EC%9D%8D',
-'담양읍'   : '%EB%8B%B4%EC%96%91%EC%9D%8D',
-'빛가람동' : '%EB%B9%9B%EA%B0%80%EB%9E%8C%EB%8F%99',
-'신대'     : '%EC%8B%A0%EB%8C%80',
-'호두리'   : '%ED%98%B8%EB%91%90%EB%A6%AC',
-'순천만'   : '%EC%88%9C%EC%B2%9C%EB%A7%8C',
-'연향동'   : '%EC%97%B0%ED%96%A5%EB%8F%99',
-'장천동'   : '%EC%9E%A5%EC%B2%9C%EB%8F%99',
-'덕충동'   : '%EB%8D%95%EC%B6%A9%EB%8F%99',
-'여천동'   : '%EC%97%AC%EC%B2%9C%EB%8F%99(%EC%97%AC%EC%88%98)',
-'문수동'   : '%EB%AC%B8%EC%88%98%EB%8F%99',
-'월내동'   : '%EC%9B%94%EB%82%B4%EB%8F%99',
-'서강동'   : '%EC%84%9C%EA%B0%95%EB%8F%99',
-'부흥동'   : '%EB%B6%80%ED%9D%A5%EB%8F%99',
-'용당동'   : '%EC%9A%A9%EB%8B%B9%EB%8F%99'
+    '측정소'   : '%EC%B8%A1%EC%A0%95%EC%86%8C',
+    '벌교읍'   : '%EB%B2%8C%EA%B5%90%EC%9D%8D',
+    '구례읍'   : '%EA%B5%AC%EB%A1%80%EC%9D%8D',
+    '곡성읍'   : '%EA%B3%A1%EC%84%B1%EC%9D%8D',
+    '강진읍'   : '%EA%B0%95%EC%A7%84%EC%9D%8D',
+    '무안읍'   : '%EB%AC%B4%EC%95%88%EC%9D%8D',
+    '신안군'   : '%EC%8B%A0%EC%95%88%EA%B5%B0',
+    '고흥읍'   : '%EA%B3%A0%ED%9D%A5%EC%9D%8D',
+    '함평읍'   : '%ED%95%A8%ED%8F%89%EC%9D%8D',
+    '신지면'   : '%EC%8B%A0%EC%A7%80%EB%A9%B4',
+    '진도읍'   : '%EC%A7%84%EB%8F%84%EC%9D%8D',
+    '장흥읍'   : '%EC%9E%A5%ED%9D%A5%EC%9D%8D',
+    '영광읍'   : '%EC%98%81%EA%B4%91%EC%9D%8D',
+    '화순읍'   : '%ED%99%94%EC%88%9C%EC%9D%8D',
+    '송단리'   : '%EC%86%A1%EB%8B%A8%EB%A6%AC',
+    '나불리'   : '%EB%82%98%EB%B6%88%EB%A6%AC',
+    '해남읍'   : '%ED%95%B4%EB%82%A8%EC%9D%8D',
+    '광양읍'   : '%EA%B4%91%EC%96%91%EC%9D%8D',
+    '진상면'   : '%EC%A7%84%EC%83%81%EB%A9%B4',
+    '태인동'   : '%ED%83%9C%EC%9D%B8%EB%8F%99',
+    '중동'     : '%EC%A4%91%EB%8F%99',
+    '삼일동'   : '%EC%82%BC%EC%9D%BC%EB%8F%99',
+    '율촌면'   : '%EC%9C%A8%EC%B4%8C%EB%A9%B4',
+    '화양면'   : '%ED%99%94%EC%96%91%EB%A9%B4',
+    '장성읍'   : '%EC%9E%A5%EC%84%B1%EC%9D%8D',
+    '담양읍'   : '%EB%8B%B4%EC%96%91%EC%9D%8D',
+    '빛가람동' : '%EB%B9%9B%EA%B0%80%EB%9E%8C%EB%8F%99',
+    '신대'     : '%EC%8B%A0%EB%8C%80',
+    '호두리'   : '%ED%98%B8%EB%91%90%EB%A6%AC',
+    '순천만'   : '%EC%88%9C%EC%B2%9C%EB%A7%8C',
+    '연향동'   : '%EC%97%B0%ED%96%A5%EB%8F%99',
+    '장천동'   : '%EC%9E%A5%EC%B2%9C%EB%8F%99',
+    '덕충동'   : '%EB%8D%95%EC%B6%A9%EB%8F%99',
+    '여천동'   : '%EC%97%AC%EC%B2%9C%EB%8F%99(%EC%97%AC%EC%88%98)',
+    '문수동'   : '%EB%AC%B8%EC%88%98%EB%8F%99',
+    '월내동'   : '%EC%9B%94%EB%82%B4%EB%8F%99',
+    '서강동'   : '%EC%84%9C%EA%B0%95%EB%8F%99',
+    '부흥동'   : '%EB%B6%80%ED%9D%A5%EB%8F%99',
+    '용당동'   : '%EC%9A%A9%EB%8B%B9%EB%8F%99'
 }
 
 gyeongbukStationNames = {
+    '측정소'   : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '화양읍'   : '%ED%99%94%EC%96%91%EC%9D%8D',
     '예천군'   : '%EC%98%88%EC%B2%9C%EA%B5%B0',
     '영양군'   : '%EC%98%81%EC%96%91%EA%B5%B0',
@@ -516,6 +535,7 @@ gyeongbukStationNames = {
 }
 
 gyeongnamStationNames = {
+    '측정소' : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '합천읍' : '%ED%95%A9%EC%B2%9C%EC%9D%8D',
     '창녕읍' : '%EC%B0%BD%EB%85%95%EC%9D%8D',
     '의령읍' : '%EC%9D%98%EB%A0%B9%EC%9D%8D',
@@ -555,6 +575,7 @@ gyeongnamStationNames = {
 }
 
 jejuStationNames = {
+    '측정소' : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '고산리' : '%EA%B3%A0%EC%82%B0%EB%A6%AC',
     '노형로' : '%EB%85%B8%ED%98%95%EB%A1%9C',
     '대정읍' : '%EB%8C%80%EC%A0%95%EC%9D%8D',
@@ -566,6 +587,7 @@ jejuStationNames = {
 }
 
 sejongStationNames = {
+    '측정소' : '%EC%B8%A1%EC%A0%95%EC%86%8C',
     '부강면' : '%EB%B6%80%EA%B0%95%EB%A9%B4',
     '한솔동' : '%ED%95%9C%EC%86%94%EB%8F%99',
     '아름동' : '%EC%95%84%EB%A6%84%EB%8F%99',
@@ -573,6 +595,7 @@ sejongStationNames = {
 }
 
 stationNames = {
+    '도시' : defaultStationNames,
     '서울' : seoulStationNames,
     '부산' : busanStationNames,
     '대구' : daeguStationNames,
@@ -590,4 +613,21 @@ stationNames = {
     '경남' : gyeongnamStationNames,
     '제주' : jejuStationNames,
     '세종' : sejongStationNames
+}
+
+serverNames = [
+    '이메일 주소',
+    'naver.com',
+    'daum.net',
+    'gmail.com'
+]
+
+dataList = {
+    "통합대기환경수치" : "kahi",
+    "미세먼지(PM2.5)" : "pm25",
+    "미세먼지(PM10)"  : "pm10",
+    "이산화질소"      : "no2",
+    "아황산가스"      : "so2",
+    "일산화탄소"      : "co",
+    "오존"            : "o3"
 }
