@@ -1,4 +1,5 @@
-import urllib.request
+from urllib.request import urlopen
+from urllib.error import URLError
 from bs4 import BeautifulSoup
 from names import *
 
@@ -14,22 +15,32 @@ def urlBuilder(serviceOperation, **options):
     return s
 
 # 측정소별 실시간 측정정보 조회
-def getMsrstnAcctoRltmMesureDnsty(sido, station, numOfRows=10, pageNo=1, dataTerm="DAILY", ver=1.3):
+def getMsrstnAcctoRltmMesureDnsty(sido, station, numOfRows=5, pageNo=1, dataTerm="DAILY", ver=1.3):
     url = urlBuilder("getMsrstnAcctoRltmMesureDnsty", numOfRows=numOfRows, pageNo=pageNo, stationName=stationNames[sido][station], dataTerm=dataTerm, ver=ver)
     print(url)
-
-    html = urllib.request.urlopen(url)
-    soup = BeautifulSoup(html, "html.parser")
     
-    totalCount = soup.find("totalcount")    # 쿼리한 데이터의 총 갯수
-    times = soup.find_all("datatime")       # 측정 시간들
-    so2Values = soup.find_all("so2value")   # 아황산가스 농도
-    coValues = soup.find_all("covalue")     # 일산화탄소 농도
-    o3Values = soup.find_all("o3value")     # 오존 농도
-    no2Values = soup.find_all("no2value")   # 이산화질소 농도
-    pm10Values = soup.find_all("pm10value") # 미세먼지(PM10) 농도
-    pm25Values = soup.find_all("pm25value") # 미세먼지(PM2.5) 농도
-    khaiValues = soup.find_all("khaivalue") # 통합대기환경수치
+    try:
+        html = urlopen(url)
+    except URLError as e:
+        print("error message:", e)
+        return None
+
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+
+        totalCount = soup.find("totalcount")    # 쿼리한 데이터의 총 갯수
+        times = soup.find_all("datatime")       # 측정 시간들
+        so2Values = soup.find_all("so2value")   # 아황산가스 농도
+        coValues = soup.find_all("covalue")     # 일산화탄소 농도
+        o3Values = soup.find_all("o3value")     # 오존 농도
+        no2Values = soup.find_all("no2value")   # 이산화질소 농도
+        pm10Values = soup.find_all("pm10value") # 미세먼지(PM10) 농도
+        pm25Values = soup.find_all("pm25value") # 미세먼지(PM2.5) 농도
+        khaiValues = soup.find_all("khaivalue") # 통합대기환경수치
+    except AttributeError as e:
+        print("error message:", e)
+        return None
+
 
     results = []
     for i in range(0, min(numOfRows, int(totalCount.string))):
@@ -44,7 +55,7 @@ def getMsrstnAcctoRltmMesureDnsty(sido, station, numOfRows=10, pageNo=1, dataTer
         if str(khaiValues[i].string) != '-': khai=float(khaiValues[i].string)
 
         temp = {}
-        temp.update(sido=sido)
+        temp.update(city=sido)
         temp.update(station=station)
         temp.update(date=str(times[i].string).split()[0])
         temp.update(time=str(times[i].string).split()[1])
@@ -54,7 +65,7 @@ def getMsrstnAcctoRltmMesureDnsty(sido, station, numOfRows=10, pageNo=1, dataTer
         temp.update(no2=no2)
         temp.update(pm10=pm10)
         temp.update(pm25=pm25)
-        temp.update(kahi=khai)
+        temp.update(khai=khai)
 
-        results.append(temp)
+        results.insert(0, temp)
     return results

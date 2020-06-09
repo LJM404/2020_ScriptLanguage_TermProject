@@ -623,11 +623,19 @@ serverNames = [
 ]
 
 dataList = {
-    "통합대기환경수치" : "kahi",
+    "통합대기환경수치" : "khai",
     "미세먼지(PM2.5)" : "pm25",
     "미세먼지(PM10)"  : "pm10",
     "이산화질소"      : "no2",
     "아황산가스"      : "so2",
     "일산화탄소"      : "co",
     "오존"            : "o3"
+}
+
+imageNames = {
+    "없음" : "default.png",
+    "좋음" : "good.png",
+    "보통" : "normal.png",
+    "나쁨" : "bad.png",
+    "심각" : "danger.png"
 }
