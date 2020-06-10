@@ -1,4 +1,5 @@
 import math, sys
+from ctypes import *
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -13,6 +14,12 @@ def extractFromData(data, key, xLabel, ny, r):
         if it[key] is not None:
             xAxis.append(it[xLabel])
             values.append(it[key])
+    
+    print("debug message: origin - ", data)
+    print("debug message: extract - ", values)
+    if len(values) == 0:
+        return xAxis, yAxis, values
+
 
     minimum, maximum = min(values), max(values)
     if math.fabs(maximum - minimum) <= sys.float_info.epsilon or ny <= 1:
@@ -32,9 +39,19 @@ class GraphBox:
         self.height= height
         self.canvas = Canvas(master=master, width=width, height=height, bg=bg)
         self.canvas.place(x=x, y=y)
-        pass
 
-    def updateGraph(self, data, key, xLabel, index, left=50, right=10, top=10, bottom=20):
+        # C++로 작성된 동적라이브러리의 함수 연결
+        clib = cdll.LoadLibrary("./Module/calcModule.dll")
+        self.getDataPointPosX = clib["getDataPointPosX"]
+        self.getDataPointPosX.argtypes = (c_float, c_float, c_float, c_int, c_int)
+        self.getDataPointPosX.restype = c_float
+        
+        self.getDataPointPosY = clib["getDataPointPosY"]
+        self.getDataPointPosY.argtypes = (c_float, c_float, c_float, c_float, c_float, c_int, c_float)
+        self.getDataPointPosY.restype = c_float
+
+
+    def updateGraph(self, data, key, xLabel, index, left=50.0, right=10.0, top=10.0, bottom=20.0):
         self.canvas.delete("all")
 
         # x축, y축 그리기
@@ -74,26 +91,16 @@ class GraphBox:
         # 데이터 포인트 그리기
         n = len(values)
         for i in range(n):
-            if math.fabs(max(values) - min(values)) <= sys.float_info.epsilon or ny <= 1:
-                x = left + (self.width - left - right) / (nx * 2) + i * (self.width - left - right) / nx
-                y = top + (self.height - top - bottom) / (ny * 2)
-            else:
-                x = left + (self.width - left - right) / (nx * 2) + i * (self.width - left - right) / nx
-                y = top + (self.height - top - bottom) / (ny * 2) + (ny - 1) * (self.height - top - bottom) / ny - (ny - 1) * ((self.height - top - bottom) / ny / (ny - 1)) * (ny - 1) * (values[i] - min(values)) / (max(values) - min(values))
+            x = self.getDataPointPosX(self.width, left, right, nx, i)
+            y = self.getDataPointPosY(self.height, top, bottom, max(values), min(values), ny, values[i])
             self.canvas.create_oval(x - 2, y - 2, x + 2, y + 2, fill="red")
 
         # 데이터 라인 그리기
         for i in range(1, n):
-            if math.fabs(max(values) - min(values)) <= sys.float_info.epsilon or ny <= 1:
-                prev_x = left + (self.width - left - right) / (nx * 2) + (i - 1) * (self.width - left - right) / nx
-                prev_y = top + (self.height - top - bottom) / (ny * 2)
-                curr_x = left + (self.width - left - right) / (nx * 2) + (i - 0) * (self.width - left - right) / nx
-                curr_y = prev_y
-            else:
-                prev_x = left + (self.width - left - right) / (nx * 2) + (i - 1) * (self.width - left - right) / nx
-                prev_y = top + (self.height - top - bottom) / (ny * 2) + (ny - 1) * (self.height - top - bottom) / ny - (ny - 1) * ((self.height - top - bottom) / ny / (ny - 1)) * (ny - 1) * (values[i - 1] - min(values)) / (max(values) - min(values))
-                curr_x = left + (self.width - left - right) / (nx * 2) + (i - 0) * (self.width - left - right) / nx
-                curr_y = top + (self.height - top - bottom) / (ny * 2) + (ny - 1) * (self.height - top - bottom) / ny - (ny - 1) * ((self.height - top - bottom) / ny / (ny - 1)) * (ny - 1) * (values[i - 0] - min(values)) / (max(values) - min(values))
+            prev_x = self.getDataPointPosX(self.width, left, right, nx, i - 1)
+            prev_y = self.getDataPointPosY(self.height, top, bottom, max(values), min(values), ny, values[i - 1])
+            curr_x = self.getDataPointPosX(self.width, left, right, nx, i - 0)
+            curr_y = self.getDataPointPosY(self.height, top, bottom, max(values), min(values), ny, values[i - 0])
             self.canvas.create_line(prev_x, prev_y, curr_x, curr_y, fill="red")
                 
 
