@@ -5,6 +5,7 @@ from tkinter import messagebox
 from graphBox import GraphBox
 from service import *
 from names import *
+from files import *
 
 
 class Program:
@@ -14,12 +15,11 @@ class Program:
         self.window.geometry("750x300") # 종횡비( 2.5:1 )
         self.window.resizable(False, False)
         self.setupProgram()
-
         self.programData = None
-
         self.window.mainloop()
 
 
+    # 프로그램의 초기 설정을 하는 함수
     def setupProgram(self):
         # 왼쪽 프레임
         self.leftFrame = ttk.LabelFrame(self.window, text="대기오염정보")
@@ -106,7 +106,7 @@ class Program:
         self.loadButton.place(x=255, y=220)
 
         # 상태 이미지 라벨
-        p = PhotoImage(file="./Data/" + imageNames["없음"])
+        p = PhotoImage(file="./Data/resource/" + imageNames["없음"])
         self.imageLabel = ttk.Label(self.imageFrame, image=p)
         self.imageLabel.image = p
         self.imageLabel.place(x=1, y=0)
@@ -134,67 +134,99 @@ class Program:
         self.khaiLabel.place(x=10, y=135)
 
 
+    # 검색 버튼 콜백 함수
+    # 1. 프로그램 데이터를 OpenAPI를 이용하여 얻는다.
+    # 2. 그래프박스의 그래프를 현재 프로그램 데이터로 업데이트 한다.
+    # 3. 측정정보 라벨들의 내용을 현재 프로그램 데이터로 업데이트 한다.
+    # 4. 상태 이미지를 현재 프로그램의 데이터의 통합대기환경수치에 따라 다른 이미지로 업데이트 한다.
+    # 5. 보내기 버튼 활성화를 결정한다.
+    # 6. 저장하기 버튼을 활성화 한다.
     def pressedSearchButton(self):
         print("debug message: pressed search button")
         self.programData = getMsrstnAcctoRltmMesureDnsty(sido=self.cityStr.get(), station=self.stationStr.get())
         self.graphbox.updateGraph(self.programData, dataList[self.graphStr.get()], "time", 0)
         self.updateInfoLabels(len(self.programData) - 1)
         self.updateImageLabel(self.programData[len(self.programData) - 1]["khai"])
+        if (self.emailIDStr.get() != "") and (self.emailIDStr.get() != "이메일 아이디") and (self.emailServerStr.get() != "") and (self.emailServerStr.get() != "이메일 주소") and (self.programData is not None) : self.sendButton["state"] = "active"
+        self.saveButton["state"] = "active"
 
-
+    # 보내기 버튼 콜백 함수
     def pressedSendButton(self):
         print("debug message: pressed send button")
 
     
+    # 저장하기 버튼 콜백 함수
     def pressedSaveButton(self):
         print("debug message: pressed save button")
+        result = saveData(self.programData)
+        if result == FILE_SUCCESS:
+            messagebox.showinfo(title="파일 저장하기", message="파일을 저장했습니다.")
 
 
+    # 불러오기 버튼 콜백 함수
     def pressedLoadButton(self):
         print("debug message: pressed load button")
+        result, data = loadData()
+        if result == FILE_SUCCESS:
+            self.programData = data
+            self.graphbox.updateGraph(self.programData, dataList[self.graphStr.get()], "time", 0)
+            self.updateInfoLabels(len(self.programData) - 1)
+            self.updateImageLabel(self.programData[len(self.programData) - 1]["khai"])
+            if (self.emailIDStr.get() != "") and (self.emailIDStr.get() != "이메일 아이디") and (self.emailServerStr.get() != "") and (self.emailServerStr.get() != "이메일 주소") and (self.programData is not None) : self.sendButton["state"] = "active"
+            self.saveButton["state"] = "active"
+        elif result == FILE_FAILED:
+            messagebox.showerror(title="파일 불러오기", message="파일 불러오기에 실패했습니다.")
 
 
+    # cityStr 콜백 함수 - 도시 이름에 따라 측정소 콤보박스의 내용을 변경 한다.
     def updateCityStr(self, index, value, op):
         print("debug message: update city string var")
         self.stationCombobox["values"] = list(stationNames[self.cityStr.get()].keys())
         self.stationCombobox.current(0)
 
 
+    # stationStr 콜백함수 - 검색 버튼 활성화를 결정한다.
     def updateStationStr(self, index, value, op):
         print("debug message: update station string var")
         if self.stationStr.get() == "측정소": self.searchButton["state"] = "disabled"
         else: self.searchButton["state"] = "active"
 
 
+    # EmailIDStr 콜백함수 - 보내기 버튼 활성화를 결정한다.
     def updateEmailIDStr(self, index, value, op):
         print("debug message: update email id string var")
-        if (self.emailIDStr.get() != "") and (self.emailIDStr.get() != "이메일 아이디") and (self.emailServerStr.get() != "") and (self.emailServerStr.get() != "이메일 주소"): self.sendButton["state"] = "active"
+        if (self.emailIDStr.get() != "") and (self.emailIDStr.get() != "이메일 아이디") and (self.emailServerStr.get() != "") and (self.emailServerStr.get() != "이메일 주소") and (self.programData is not None) : self.sendButton["state"] = "active"
         else: self.sendButton["state"] = "disabled"
 
 
+    # emailServerStr 콜백함수 - 보내기 버튼 활성화를 결정한다.
     def updateEmailServerStr(self, index, value, op):
         print("debug message: update email server string var")
-        if (self.emailIDStr.get() != "") and (self.emailIDStr.get() != "이메일 아이디") and (self.emailServerStr.get() != "") and (self.emailServerStr.get() != "이메일 주소"): self.sendButton["state"] = "active"
+        if (self.emailIDStr.get() != "") and (self.emailIDStr.get() != "이메일 아이디") and (self.emailServerStr.get() != "") and (self.emailServerStr.get() != "이메일 주소") and (self.programData is not None): self.sendButton["state"] = "active"
         else: self.sendButton["state"] = "disabled"
 
     
+    # 이메일 아이디 입력창 콜백함수
     def updateEmailIDEntry(self, event):
         print("debug message: update Email id entry")
         if self.emailIDStr.get() == "이메일 아이디": self.emailIDStr.set("")
         elif self.emailIDStr.get() == "": self.emailIDStr.set("이메일 아이디")
 
 
+    # 이메일 주소 입력창 콜백함수
     def updateEmailServerCombobox(self, event):
         print("debug message: update Email server combobox")
         if self.emailServerStr.get() == "이메일 주소": self.emailServerStr.set("")
         elif self.emailServerStr.get() == "": self.emailServerStr.set("이메일 주소")
 
 
+    # graphStr 콜백함수 - 그래프박스의 그래프 내용을 업데이트한다.
     def updateGraphStr(self, index, value, op):
         print("debug message: update Graph string var")
         self.graphbox.updateGraph(self.programData, dataList[self.graphStr.get()], "time", 0)
 
 
+    # 측정정보 라벨들을 현재 가진 데이터로 업데이트 하는 함수
     def updateInfoLabels(self, index):
         if self.programData is not None:
             self.cityLabel.configure(text="도시: " + str(self.programData[index]["city"]))
@@ -220,16 +252,17 @@ class Program:
             self.khaiLabel.configure(text="통합대기환경수치: ")
 
 
+    # 상태 이미지를 현재 가진 데이터의 통합대기환경수치에 따라 다른 상태 이미지로 업데이트 하는 함수
     def updateImageLabel(self, value):
         if value is None:
-            p = PhotoImage(file="./Data/" + imageNames["없음"])
+            p = PhotoImage(file="./Data/resource/" + imageNames["없음"])
         elif (0 <= value) and (value <= 50):
-            p = PhotoImage(file="./Data/" + imageNames["좋음"])
+            p = PhotoImage(file="./Data/resource/" + imageNames["좋음"])
         elif (51 <= value) and (value <= 100):
-            p = PhotoImage(file="./Data/" + imageNames["보통"])
+            p = PhotoImage(file="./Data/resource/" + imageNames["보통"])
         elif (101 <= value) and (value <= 250):
-            p = PhotoImage(file="./Data/" + imageNames["나쁨"])
+            p = PhotoImage(file="./Data/resource/" + imageNames["나쁨"])
         elif (251 <= value):
-            p = PhotoImage(file="./Data/" + imageNames["심각"])
+            p = PhotoImage(file="./Data/resource/" + imageNames["심각"])
         self.imageLabel.configure(image=p)
         self.imageLabel.image = p
